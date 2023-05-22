@@ -1,0 +1,12 @@
+.auth__submit-button_disabled {
+	cursor: not-allowed;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #000;
+  opacity: .5;
+}
+
+.auth__submit-button_disabled:hover {
+	opacity: .5;
+	cursor: not-allowed;
+}

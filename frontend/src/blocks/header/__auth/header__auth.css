@@ -1,0 +1,26 @@
+.header__auth {
+	display: flex;
+  align-self: flex-start;
+	align-items: center;
+  gap: 24px;
+  visibility: visible;
+  border-bottom: 1px solid transparent;
+  transition: all .5s ease;
+}
+
+@media (max-width: 545px) {
+  .header__auth {
+    margin-top: 0;
+    padding: 40px 0;
+		gap: 18px;
+    visibility: hidden;
+    opacity: 0;
+    border-bottom-color:  #545454;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    transform: translateY(-100%);
+  }
+}

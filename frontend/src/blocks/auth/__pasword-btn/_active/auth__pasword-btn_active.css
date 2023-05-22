@@ -1,0 +1,3 @@
+.auth__pasword-btn_active::after {
+	opacity: 0;
+}

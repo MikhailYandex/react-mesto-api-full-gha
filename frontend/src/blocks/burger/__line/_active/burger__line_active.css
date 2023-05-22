@@ -1,0 +1,15 @@
+.burger__line_active {
+  background-color: transparent;
+	transition: all .5s ease;
+}
+
+
+.burger__line_active::before {
+  bottom: 0;
+  transform: rotateZ(45deg);
+}
+
+.burger__line_active::after {
+  bottom: 0;
+  transform: rotateZ(-45deg);
+}

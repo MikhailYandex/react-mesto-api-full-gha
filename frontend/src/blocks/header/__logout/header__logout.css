@@ -1,0 +1,26 @@
+.header__logout {
+	font-family: 'Inter', Arial, sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 18px;
+	line-height: 22px;
+	text-decoration: none;
+	color: #A9A9A9;
+	transition: all .5s ease;
+}
+
+.header__logout:hover {
+	opacity: .6;
+}
+
+@media (max-width: 920px){
+	.header__logout {
+		margin-right: 30px;
+	}
+}
+
+@media (max-width: 545px){
+	.header__logout {
+		margin-right: 0;
+	}
+}

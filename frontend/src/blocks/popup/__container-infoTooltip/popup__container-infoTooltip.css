@@ -1,0 +1,19 @@
+.popup__container-infoTooltip {
+	padding: 60px 36px;
+  width: 430px;
+  min-height: 330px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+@media (max-width: 630px) {
+  .popup__container-infoTooltip {
+    width: 282px;
+    min-height: 322px;
+		padding: 50px 18px;
+  }
+}

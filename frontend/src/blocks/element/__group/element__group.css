@@ -1,0 +1,9 @@
+.element__group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 0 0 10px 10px;
+  background-color: #fff;
+  min-height: 79px;
+  padding: 0 15px 0 21px;
+}

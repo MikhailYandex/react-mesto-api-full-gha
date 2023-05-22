@@ -1,0 +1,15 @@
+.popup__title-avatar {
+  padding: 0;
+  font-size: 24px;
+  line-height: 29px;
+  font-weight: 900;
+  color: #000;
+  margin: 0 0 54px 0;
+}
+
+@media (max-width: 630px) {
+  .popup__title-avatar {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

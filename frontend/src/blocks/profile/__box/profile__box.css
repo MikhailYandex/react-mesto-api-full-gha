@@ -1,0 +1,11 @@
+.profile__box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .profile__box {
+    flex-direction: column;
+  }
+}

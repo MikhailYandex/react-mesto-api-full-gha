@@ -1,0 +1,20 @@
+.auth__pasword-btn {
+	position: absolute;
+	right: 4px;
+	top: 0;
+	cursor: pointer;
+	width: 18px;
+}
+
+.auth__pasword-btn::after {
+	position: absolute;
+	content: '';
+	top: 8px;
+	right: 2px;
+	width: 23px;
+	height: 2px;
+	background: #fefefe;
+	transform: rotate(135deg);
+	transition: all 0.5s ease;
+	opacity: 1;
+}
