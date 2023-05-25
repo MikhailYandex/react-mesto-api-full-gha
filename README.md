@@ -8,7 +8,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 158.160.107.76
+IP-адрес 158.160.45.15
 
 Frontend https://mikhail.yandex.nomoredomains.monster
 
