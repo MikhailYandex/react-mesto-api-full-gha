@@ -1,4 +1,4 @@
-const BASE_URL = "https://auth.nomoreparties.co";
+const BASE_URL = "https://api.mikhail.yandex.nomoredomains.monster";
 
 function checkResponse(res) {
   if (res.ok) {
