@@ -1,4 +1,4 @@
-[![Tests](https://github.com/yandex-praktikum/react-mesto-api-full-gha/actions/workflows/tests.yml/badge.svg)](https://github.com/yandex-praktikum/react-mesto-api-full-gha/actions/workflows/tests.yml)
+[![Tests](https://github.com/MikhailYandex/react-mesto-api-full-gha/actions/workflows/tests.yml/badge.svg)](https://github.com/MikhailYandex/react-mesto-api-full-gha/actions/workflows/tests.yml)
 # ***🌟Проект Mesto с деплоем на сервер (бэкенд + фронтенд)***
 Данный проект является итоговой работой за 13-14-15 спринт на ***Яндекс.Практикуме***.
 
