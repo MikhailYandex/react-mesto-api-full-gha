@@ -50,28 +50,9 @@ function App() {
 
   const navigate = useNavigate();
 
-  useEffect(() => {
-    api
-      .getCards()
-      .then((data) => {
-        setCards(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  //получение действующего профиля
-  useEffect(() => {
-    api
-      .getUserInfo()
-      .then((data) => {
-        setCurrentUser(data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
   //обработчик лайка карточки
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     api
       .handleCardLike(card._id, isLiked)
@@ -176,9 +157,25 @@ function App() {
       auth
         .checkToken(jwt)
         .then((data) => {
-          setUserEmail(data.data.email);
+          setUserEmail(data.email);
           setLoggedIn(true);
           navigate("/", { replace: true });
+					api
+            .getUserInfo()
+            .then((data) => {
+              setCurrentUser(data);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
+          api
+            .getInitialCards()
+            .then((data) => {
+              setCards(data);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           console.log(err);
