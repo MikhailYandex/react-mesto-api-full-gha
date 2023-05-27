@@ -50,9 +50,19 @@ function App() {
 
   const navigate = useNavigate();
 
+	useEffect(() => {
+    loggedIn &&
+      Promise.all([api.getCards(), api.getUserInfo()])
+        .then(([cardsData, userData]) => {
+          setCards(cardsData);
+          setCurrentUser(userData);
+        })
+        .catch((err) => console.log(err));
+  }, [loggedIn]);
+
   //обработчик лайка карточки
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => (i._id || i) === currentUser._id);
 
     api
       .handleCardLike(card._id, isLiked)
@@ -152,7 +162,7 @@ function App() {
 
   //при открытии страницы проверяется токен
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("token") || loggedIn) {
       const jwt = localStorage.getItem("token");
       auth
         .checkToken(jwt)
@@ -160,18 +170,12 @@ function App() {
           setUserEmail(data.email);
           setLoggedIn(true);
           navigate("/", { replace: true });
-			loggedIn &&
-				Promise.all([api.getCards(), api.getUserInfo()])
-					.then(([cards, userInfo]) => {
-						setCards(cards);
-						setCurrentUser(userInfo);
-					})
         })
         .catch((err) => {
           console.log(err);
         });
     }
-  }, [loggedIn, navigate]);
+  }, [loggedIn]);
 
   function handleSingOut() {
     localStorage.removeItem("token");
