@@ -162,7 +162,7 @@ function App() {
 
   //при открытии страницы проверяется токен
   useEffect(() => {
-    if (localStorage.getItem("token") || loggedIn) {
+    if (loggedIn) {
       const jwt = localStorage.getItem("token");
       auth
         .checkToken(jwt)
