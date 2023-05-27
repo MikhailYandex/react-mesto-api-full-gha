@@ -5,10 +5,10 @@ function Card({ card, onCardClick, onCardLike, onTrashClick }) {
   const userData = useContext(CurrentUserContext);
 
   //проверка собственник ли карточки
-  const isOwner = card.owner === userData._id;
+  const isOwner = card.owner._id === userData._id;
 
   //проверяем, есть ли у карточки лайк, поставленный текущим пользователем
-  const isLiked = card.likes.some((i) => i === userData._id);
+  const isLiked = card.likes.some((i) => i._id === userData._id);
 
   //переменная для кнопки лайка
   const cardLikeButtonClassName = `element__like ${

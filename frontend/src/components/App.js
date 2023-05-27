@@ -52,7 +52,7 @@ function App() {
 
   //обработчик лайка карточки
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i === currentUser._id);
+    const isLiked = card.likes.some((i) => i._id === currentUser._id);
 
     api
       .handleCardLike(card._id, isLiked)
@@ -160,28 +160,17 @@ function App() {
           setUserEmail(data.email);
           setLoggedIn(true);
           navigate("/", { replace: true });
-					api
-            .getUserInfo()
-            .then((data) => {
-              setCurrentUser(data);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
-          api
-            .getCards()
-            .then((data) => {
-              setCards(data);
-            })
-            .catch((err) => {
-              console.log(err);
-            });
+					Promise.all([api.getCards(), api.getUserInfo()])
+						.then(([cards, userInfo]) => {
+							setCards(cards);
+							setCurrentUser(userInfo);
+						})
         })
         .catch((err) => {
           console.log(err);
         });
     }
-  }, []);
+  }, [loggedIn]);
 
   function handleSingOut() {
     localStorage.removeItem("token");
