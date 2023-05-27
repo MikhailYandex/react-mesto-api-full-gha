@@ -72,7 +72,7 @@ class Api {
 const api = new Api({
   url: "https://api.mikhail.yandex.nomoredomains.monster",
   headers: {
-    authorization: `Bearer ${localStorage.getItem("token")}`,
+    "Authorization": `Bearer ${localStorage.getItem("token")}`,
     "Content-Type": "application/json",
   },
 });

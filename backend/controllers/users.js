@@ -21,7 +21,7 @@ const login = (req, res, next) => {
       );
       return res.send({ token });
     })
-    .catch((err) => next(err));
+    .catch(next);
 };
 
 const createUser = (req, res, next) => {
@@ -54,7 +54,7 @@ const createUser = (req, res, next) => {
 const getUserInfo = (req, res, next) => {
   User.findById(req.user._id)
     .then((user) => res.send(user))
-    .catch((err) => next(err));
+    .catch(next);
 };
 
 const getUsers = (req, res, next) => {
