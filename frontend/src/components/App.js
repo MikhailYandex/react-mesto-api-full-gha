@@ -51,14 +51,15 @@ function App() {
   const navigate = useNavigate();
 
 	useEffect(() => {
-    loggedIn &&
+    if (loggedIn && userEmail) {
       Promise.all([api.getCards(), api.getUserInfo()])
         .then(([cardsData, userData]) => {
           setCards(cardsData);
           setCurrentUser(userData);
         })
         .catch((err) => console.log(err));
-  }, [loggedIn]);
+		}
+  }, [loggedIn, userEmail]);
 
   //обработчик лайка карточки
   function handleCardLike(card) {
@@ -162,7 +163,7 @@ function App() {
 
   //при открытии страницы проверяется токен
   useEffect(() => {
-    if (loggedIn) {
+    if (localStorage.getItem("token")) {
       const jwt = localStorage.getItem("token");
       auth
         .checkToken(jwt)
@@ -175,7 +176,7 @@ function App() {
           console.log(err);
         });
     }
-  }, [loggedIn]);
+  }, [navigate]);
 
   function handleSingOut() {
     localStorage.removeItem("token");
