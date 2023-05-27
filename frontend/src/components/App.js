@@ -51,7 +51,7 @@ function App() {
   const navigate = useNavigate();
 
 	useEffect(() => {
-    if (loggedIn && userEmail) {
+    if (loggedIn) {
       Promise.all([api.getCards(), api.getUserInfo()])
         .then(([cardsData, userData]) => {
           setCards(cardsData);
@@ -59,7 +59,7 @@ function App() {
         })
         .catch((err) => console.log(err));
 		}
-  }, [loggedIn, userEmail]);
+  }, [loggedIn]);
 
   //обработчик лайка карточки
   function handleCardLike(card) {
@@ -163,7 +163,7 @@ function App() {
 
   //при открытии страницы проверяется токен
   useEffect(() => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("token") && loggedIn) {
       const jwt = localStorage.getItem("token");
       auth
         .checkToken(jwt)
@@ -176,7 +176,7 @@ function App() {
           console.log(err);
         });
     }
-  }, [navigate]);
+  }, [navigate, loggedIn]);
 
   function handleSingOut() {
     localStorage.removeItem("token");
