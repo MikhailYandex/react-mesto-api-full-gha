@@ -169,7 +169,7 @@ function App() {
               console.log(err);
             });
           api
-            .getInitialCards()
+            .getCards()
             .then((data) => {
               setCards(data);
             })
