@@ -152,7 +152,7 @@ function App() {
 
   //при открытии страницы проверяется токен
   useEffect(() => {
-    if (loggedIn) {
+    if (localStorage.getItem("token")) {
       const jwt = localStorage.getItem("token");
       auth
         .checkToken(jwt)
@@ -160,17 +160,18 @@ function App() {
           setUserEmail(data.email);
           setLoggedIn(true);
           navigate("/", { replace: true });
-					Promise.all([api.getCards(), api.getUserInfo()])
-						.then(([cards, userInfo]) => {
-							setCards(cards);
-							setCurrentUser(userInfo);
-						})
+			loggedIn &&
+				Promise.all([api.getCards(), api.getUserInfo()])
+					.then(([cards, userInfo]) => {
+						setCards(cards);
+						setCurrentUser(userInfo);
+					})
         })
         .catch((err) => {
           console.log(err);
         });
     }
-  }, [loggedIn]);
+  }, [loggedIn, navigate]);
 
   function handleSingOut() {
     localStorage.removeItem("token");
