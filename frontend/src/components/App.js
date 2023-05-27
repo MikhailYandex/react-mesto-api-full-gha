@@ -52,7 +52,7 @@ function App() {
 
   //обработчик лайка карточки
   function handleCardLike(card) {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
+    const isLiked = card.likes.some((i) => i === currentUser._id);
 
     api
       .handleCardLike(card._id, isLiked)
@@ -150,22 +150,33 @@ function App() {
       .finally(() => setIsLoadingButton(false));
   }
 
+	useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const user = auth
+				.checkToken(token)
+				.then((res) => {
+					if (res) {
+						setLoggedIn(true);
+						setCurrentUser({
+							email: res.data.email,
+						});
+					}
+				})
+				.catch((err) => console.log(err));
+			return user;
+    }
+  }, [loggedIn]);
+
   //при открытии страницы проверяется токен
   useEffect(() => {
-    if (localStorage.getItem("token")) {
-      const jwt = localStorage.getItem("token");
-      auth
-        .checkToken(jwt)
-        .then((data) => {
-          setUserEmail(data.email);
-          setLoggedIn(true);
-          navigate("/", { replace: true });
-					Promise.all([api.getCards(), api.getUserInfo()])
-						.then(([cards, userInfo]) => {
-							setCards(cards);
-							setCurrentUser(userInfo);
-						})
-        })
+    if (loggedIn) {
+			navigate("/", { replace: true });
+			Promise.all([api.getCards(), api.getUserInfo()])
+				.then(([cards, userInfo]) => {
+					setCards(cards);
+					setCurrentUser(userInfo);
+				})
         .catch((err) => {
           console.log(err);
         });
