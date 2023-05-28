@@ -171,12 +171,6 @@ function App() {
           setUserEmail(data.email);
           setLoggedIn(true);
           navigate("/", { replace: true });
-					Promise.all([api.getCards(), api.getUserInfo()])
-					.then(([cardsData, userData]) => {
-						setCards(cardsData);
-						setCurrentUser(userData);
-        })
-        .catch((err) => console.log(err));
         })
         .catch((err) => {
           console.log(err);
