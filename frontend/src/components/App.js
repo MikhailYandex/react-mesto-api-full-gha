@@ -147,10 +147,10 @@ function App() {
       .authorize(email, password)
       .then((data) => {
         if (data.token) {
+					setLoggedIn(true);
+					localStorage.setItem("token", data.token);
+					setUserEmail(email);
           navigate("/", { replace: true });
-          setLoggedIn(true);
-          localStorage.setItem("token", data.token);
-          setUserEmail(email);
         }
       })
       .catch((err) => {
@@ -163,7 +163,7 @@ function App() {
 
   //при открытии страницы проверяется токен
   useEffect(() => {
-    if (localStorage.getItem("token") && loggedIn) {
+    if (loggedIn) {
       const jwt = localStorage.getItem("token");
       auth
         .checkToken(jwt)
@@ -171,12 +171,18 @@ function App() {
           setUserEmail(data.email);
           setLoggedIn(true);
           navigate("/", { replace: true });
+					Promise.all([api.getCards(), api.getUserInfo()])
+					.then(([cardsData, userData]) => {
+						setCards(cardsData);
+						setCurrentUser(userData);
+        })
+        .catch((err) => console.log(err));
         })
         .catch((err) => {
           console.log(err);
         });
     }
-  }, [navigate, loggedIn]);
+  }, [loggedIn, navigate]);
 
   function handleSingOut() {
     localStorage.removeItem("token");
