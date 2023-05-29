@@ -50,17 +50,6 @@ function App() {
 
   const navigate = useNavigate();
 
-	useEffect(() => {
-    if (loggedIn) {
-      Promise.all([api.getCards(), api.getUserInfo()])
-        .then(([cardsData, userData]) => {
-          setCards(cardsData);
-          setCurrentUser(userData);
-        })
-        .catch((err) => console.log(err));
-		}
-  }, [loggedIn]);
-
   //обработчик лайка карточки
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => (i._id || i) === currentUser._id);
@@ -147,10 +136,10 @@ function App() {
       .authorize(email, password)
       .then((data) => {
         if (data.token) {
-					setLoggedIn(true);
-					localStorage.setItem("token", data.token);
-					setUserEmail(email);
-          navigate("/", { replace: true });
+					navigate("/", { replace: true });
+          setLoggedIn(true);
+          localStorage.setItem("token", data.token);
+          setUserEmail(email);
         }
       })
       .catch((err) => {
@@ -163,14 +152,20 @@ function App() {
 
   //при открытии страницы проверяется токен
   useEffect(() => {
-    if (loggedIn) {
-      const jwt = localStorage.getItem("token");
+		const jwt = localStorage.getItem("token");
+    if (jwt) {
       auth
         .checkToken(jwt)
         .then((data) => {
-          setUserEmail(data.email);
+					setUserEmail(data.email);
           setLoggedIn(true);
           navigate("/", { replace: true });
+					Promise.all([api.getCards(), api.getUserInfo()])
+					.then(([cardsData, userData]) => {
+						setCards(cardsData);
+						setCurrentUser(userData);
+					})
+					.catch((err) => console.log(err));
         })
         .catch((err) => {
           console.log(err);
