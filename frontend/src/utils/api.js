@@ -15,6 +15,11 @@ class Api {
     return fetch(url, options).then(this._checkResponse)
   }
 
+	setToken(token) {
+		localStorage.setItem('token', token);
+    this._headers.authorization = `Bearer ${token}`;
+  }
+
 	getUserInfo() {
     return this._request(`${this._url}/users/me`, {
       headers: this._headers
@@ -72,7 +77,6 @@ class Api {
 const api = new Api({
   url: "https://api.mikhail.yandex.nomoredomains.monster",
   headers: {
-    "Authorization": `Bearer ${localStorage.getItem("token")}`,
     "Content-Type": "application/json",
   },
 });

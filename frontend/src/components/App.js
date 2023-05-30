@@ -138,7 +138,7 @@ function App() {
         if (data.token) {
 					navigate("/", { replace: true });
           setLoggedIn(true);
-          localStorage.setItem("token", data.token);
+          api.setToken(data.token)
           setUserEmail(email);
         }
       })
