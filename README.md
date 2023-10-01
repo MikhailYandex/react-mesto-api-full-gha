@@ -27,7 +27,7 @@
 * Псевдоклассы;
 * Webpack;
 * Express;
-* MongodDB.
+* MongodDB;
 ---
 
 Адрес репозитория: https://github.com/MikhailYandex/react-mesto-api-full-gha
